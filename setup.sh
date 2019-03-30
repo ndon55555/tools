@@ -19,7 +19,7 @@ cleanup () {
     action "Removing unused packages"
     apt autoremove -f
     action "Removing temporary folder for setting up tools"
-    rm -rf $setupDir
+    rm -rfv $setupDir
 }
 
 setup () {
@@ -42,7 +42,9 @@ setup () {
 
     action "Installing fuzzy finder"
     git clone --depth 1 https://github.com/junegunn/fzf.git "$setupDir"/fzf
-    "${setupDir}"/fzf/install --all
+    pushd ~
+        "${setupDir}"/fzf/install --all
+    popd
 }
 
 ################## Script execution ##################
