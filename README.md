@@ -1,6 +1,6 @@
 # Tools
 
-This repo contains a script to install my preffered configurations bash.
+This repo contains a script to install my preferred bash configurations.
 
 Simply do: 
 ```
