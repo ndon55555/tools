@@ -15,18 +15,20 @@ elevate_privileges () {
 }
 
 cleanup () {
+    action "Removing unused packages"
+    apt autoremove -f
     action "Removing temporary folder for setting up tools"
     rm -rf setupDir
 }
 
 setup () {
     setupDir="/tmp/setup-tools-tmp"
-    action "Creating temporary folder for setting up tools"
+    action "Creating temporary folder for setting up tools at $setupDir"
     mkdir "$setupDir"
     cd "$setupDir"
 
     action "Installing zsh and oh-my-zsh"
-    sudo apt install zsh
+    apt install zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     sed -i -e 's/ZSH_THEME="robbyrussell"/ZSH_THEME="af-magic"/' ~/.zshrc # TODO somehow change ZSH_THEME="robbyrussell"
                                                                           # to ZSH_THEME=".*"
@@ -38,6 +40,7 @@ set background=dark
 set number " Show line numbers
 set hlsearch " Highlight search
 :highlight lineNr ctermfg=white " Make line numbers white
+set autoindent
    
 " Tab size = 4
 set tabstop=4
