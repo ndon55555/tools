@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 setupDir="/tmp/setup-tools-tmp"
+configDir="$(dirname $0)/configurations"
 green='\033[0;32m'
 noColor='\033[0m'
 
@@ -31,10 +32,13 @@ setup () {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     action "Replacing vim configurations"
-    cp "$(dirname $0)"/configurations/.vimrc ~/.vimrc
+    cp -v "$configDir"/.vimrc ~/.vimrc
 
     action "Replacing tmux configurations"
-    cp "$(dirname $0)"/configurations/.tmux.conf ~/.tmux.conf
+    cp -v "$configDir"/.tmux.conf ~/.tmux.conf
+
+    action "Replacing git configurations"
+    cp -v "$configDir"/.gitconfig ~/.gitconfig
 
     action "Making sure Git and other programs use vim as default editor"
     export VISUAL="vim"

@@ -1,0 +1,7 @@
+[user]
+	name = Don Nguyen
+	email = ndon55555@gmail.com
+[alias]
+    co = checkout
+    ci = commit
+    st = status
