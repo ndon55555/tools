@@ -45,9 +45,9 @@ setup () {
     export EDITOR="$VISUAL"
 
     action "Installing fuzzy finder"
-    git clone --depth 1 https://github.com/junegunn/fzf.git "$setupDir"/fzf
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     pushd ~
-        "${setupDir}"/fzf/install --all
+        .fzf/install --all
     popd
 }
 
