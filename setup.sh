@@ -31,6 +31,9 @@ setup () {
     apt install zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+    action "Replacing zsh configurations"
+    cp -v "$configDir"/.zshrc ~/.zshrc
+
     action "Replacing vim configurations"
     cp -v "$configDir"/.vimrc ~/.vimrc
 
@@ -39,10 +42,6 @@ setup () {
 
     action "Replacing git configurations"
     cp -v "$configDir"/.gitconfig ~/.gitconfig
-
-    action "Making sure Git and other programs use vim as default editor"
-    export VISUAL="vim"
-    export EDITOR="$VISUAL"
 
     action "Installing fuzzy finder"
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

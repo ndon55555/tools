@@ -97,7 +97,11 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Allows for lower priority background jobs. Fixes ability to use 'z' plugin..
+# Allows for lower priority background jobs. Fixes ability to use 'z' plugin.
 case $(uname -a) in
     *Microsoft*) unsetopt BG_NICE ;;
 esac
+
+# Sets the default editor for almost all programs.
+export VISUAL='vim'
+export EDITOR=$VISUAL
