@@ -28,7 +28,7 @@ setup () {
     mkdir "$setupDir"
 
     action "Installing zsh and oh-my-zsh"
-    apt install zsh
+    apt-get install zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     action "Replacing zsh configurations"
@@ -48,6 +48,9 @@ setup () {
     pushd ~
         .fzf/install --all
     popd
+
+    action "Installing The Silver Searcher"
+    apt-get install silversearcher-ag
 }
 
 ################## Script execution ##################

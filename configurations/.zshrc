@@ -105,3 +105,9 @@ esac
 # Sets the default editor for almost all programs.
 export VISUAL='vim'
 export EDITOR=$VISUAL
+
+# Stop zsh from piping some commands into `less`
+unset LESS
+
+# For executing Windows commands if using WSL
+alias win="cmd.exe /c"
