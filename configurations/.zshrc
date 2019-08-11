@@ -109,5 +109,5 @@ export EDITOR=$VISUAL
 # Stop zsh from piping some commands into `less`
 unset LESS
 
-# For executing Windows commands if using WSL
-alias win="cmd.exe /c"
+# For executing Windows PowerShell commands if using WSL
+alias pow="powershell.exe /c"
