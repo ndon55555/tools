@@ -110,4 +110,4 @@ export EDITOR=$VISUAL
 unset LESS
 
 # For executing Windows PowerShell commands if using WSL
-alias pow="powershell.exe /c"
+alias pow="powershell.exe"
