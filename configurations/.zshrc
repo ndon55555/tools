@@ -111,3 +111,6 @@ unset LESS
 
 # For executing Windows PowerShell commands if using WSL
 alias pow="powershell.exe"
+
+# To use Golang
+export PATH=$PATH:/usr/local/go/bin

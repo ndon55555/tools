@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-setupDir="/tmp/setup-tools-tmp"
+setupDir=""
 configDir="$(dirname $0)/configurations"
 green='\033[0;32m'
 noColor='\033[0m'
@@ -18,14 +18,14 @@ elevate_privileges () {
 
 cleanup () {
     action "Removing unused packages"
-    apt autoremove -f
+    apt autoremove -f -y
     action "Removing temporary folder for setting up tools"
     rm -rfv $setupDir
 }
 
 setup () {
-    action "Creating temporary folder for setting up tools at $setupDir"
-    mkdir "$setupDir"
+    setupDir="$(mktemp -d)"
+    action "Created temporary folder for setting up tools at $setupDir"
 
     action "Installing zsh and oh-my-zsh"
     apt-get install zsh
@@ -51,6 +51,13 @@ setup () {
 
     action "Installing The Silver Searcher"
     apt-get install silversearcher-ag
+
+    action "Installing Golang"
+    wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+    tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
+
+    action "Sourcing .zshrc"
+    source ~/.zshrc
 }
 
 ################## Script execution ##################
