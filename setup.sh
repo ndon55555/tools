@@ -29,13 +29,13 @@ setup () {
     action "Created temporary folder for setting up tools at $setupDir"
 
     action "Running apt-get update"
-    apt-get update
+    apt-get -y update
 
     action "Installing curl, wget, python3, and vim"
-    apt-get install curl wget python3 vim
+    apt-get -y install curl wget python3 vim
 
     action "Installing zsh and oh-my-zsh"
-    apt-get install zsh
+    apt-get -y install zsh
     RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     action "Replacing zsh configurations"
@@ -58,14 +58,14 @@ setup () {
     popd
 
     action "Installing The Silver Searcher"
-    apt-get install silversearcher-ag
+    apt-get -y install silversearcher-ag
 
     action "Installing Golang 1.12.9"
     wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
     tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
 
     action "Installing latest NodeJS"
-    pushd "$configDir"
+    pushd "$setupDir"
     "$scriptsDir/install-latest-node.sh"
     popd
 
@@ -84,7 +84,7 @@ setup () {
     vim +PlugInstall +qa
 
     
-    if [[ $(ps -p $$ | grep zsh) ]]; then
+    if [[ -z $(ps -p $$ | grep zsh) ]]; then
         action "Running zsh"
         ZSH_DISABLE_COMPFIX=true exec zsh -l
     fi
