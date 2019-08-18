@@ -2,6 +2,7 @@
 
 setupDir=""
 configDir="$(dirname $0)/configurations"
+scriptsDir="$(dirname $0)/scripts"
 green='\033[0;32m'
 noColor='\033[0m'
 
@@ -36,6 +37,7 @@ setup () {
 
     action "Replacing vim configurations"
     cp -v "$configDir"/.vimrc ~/.vimrc
+    cp -v "$configDir"/.vim/* ~/.vim/
 
     action "Replacing tmux configurations"
     cp -v "$configDir"/.tmux.conf ~/.tmux.conf
@@ -52,9 +54,21 @@ setup () {
     action "Installing The Silver Searcher"
     apt-get install silversearcher-ag
 
-    action "Installing Golang"
+    action "Installing Golang 1.12.9"
     wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
     tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
+
+    action "Installing latest NodeJS"
+    pushd "$configDir"
+    "$scriptsDir/install-latest-node.sh"
+    popd
+
+    action "Installing latest Pip"
+    curl https://bootstrap.pypa.io/get-pip.py -o "$configDir/get-pip.py"
+    python3 "$configDir/get-pip.py"
+
+    action "Installing pynvim" # Makes deoplete plugin for vim work
+    pip3 install --user pynvim
 
     action "Installing vim-plug"
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
