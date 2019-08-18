@@ -36,7 +36,7 @@ setup () {
 
     action "Installing zsh and oh-my-zsh"
     apt-get install zsh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     action "Replacing zsh configurations"
     cp -v "$configDir"/.zshrc ~/.zshrc
@@ -71,7 +71,7 @@ setup () {
 
     action "Installing latest Pip"
     curl https://bootstrap.pypa.io/get-pip.py -o "$setupDir/get-pip.py"
-    python3 "$configDir/get-pip.py"
+    python3 "$setupDir/get-pip.py"
 
     action "Installing pynvim" # Makes deoplete plugin for vim work
     pip3 install --user pynvim
@@ -83,8 +83,11 @@ setup () {
     action "Installing vim plugins"
     vim +PlugInstall +qa
 
-    action "Sourcing .zshrc"
-    source ~/.zshrc
+    
+    if [[ $(ps -p $$ | grep zsh) ]]; then
+        action "Running zsh"
+        ZSH_DISABLE_COMPFIX=true exec zsh -l
+    fi
 }
 
 ################## Script execution ##################
