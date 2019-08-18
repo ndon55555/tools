@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 setupDir=""
-configDir="$(dirname $0)/configurations"
-scriptsDir="$(dirname $0)/scripts"
+configDir="$(realpath $(dirname $0))/configurations"
+scriptsDir="$(realpath $(dirname $0))/scripts"
 green='\033[0;32m'
 noColor='\033[0m'
 
@@ -27,6 +27,12 @@ cleanup () {
 setup () {
     setupDir="$(mktemp -d)"
     action "Created temporary folder for setting up tools at $setupDir"
+
+    action "Running apt-get update"
+    apt-get update
+
+    action "Installing curl, wget, python3, and vim are installed"
+    apt-get install curl wget python3 vim
 
     action "Installing zsh and oh-my-zsh"
     apt-get install zsh
