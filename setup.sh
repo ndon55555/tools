@@ -69,6 +69,9 @@ setup () {
     "$scriptsDir/install-latest-node.sh"
     popd
 
+    action "Installing python3-distutils" # Need this to get pip
+    apt-get install -y python3-distutils
+    
     action "Installing latest Pip"
     curl https://bootstrap.pypa.io/get-pip.py -o "$setupDir/get-pip.py"
     python3 "$setupDir/get-pip.py"
