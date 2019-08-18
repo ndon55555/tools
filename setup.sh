@@ -64,7 +64,7 @@ setup () {
     popd
 
     action "Installing latest Pip"
-    curl https://bootstrap.pypa.io/get-pip.py -o "$configDir/get-pip.py"
+    curl https://bootstrap.pypa.io/get-pip.py -o "$setupDir/get-pip.py"
     python3 "$configDir/get-pip.py"
 
     action "Installing pynvim" # Makes deoplete plugin for vim work

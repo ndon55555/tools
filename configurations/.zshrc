@@ -114,3 +114,6 @@ alias pow="powershell.exe"
 
 # To use Golang
 export PATH=$PATH:/usr/local/go/bin
+
+# To use Go Modules
+export GO111MODULE=on
