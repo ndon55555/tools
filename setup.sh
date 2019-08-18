@@ -46,7 +46,7 @@ setup () {
     action "Installing fuzzy finder"
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     pushd ~
-        .fzf/install --all
+    .fzf/install --all
     popd
 
     action "Installing The Silver Searcher"
@@ -55,6 +55,13 @@ setup () {
     action "Installing Golang"
     wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
     tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
+
+    action "Installing vim-plug"
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    action "Installing vim plugins"
+    vim +PlugInstall +qa
 
     action "Sourcing .zshrc"
     source ~/.zshrc
