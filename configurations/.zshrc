@@ -113,7 +113,9 @@ unset LESS
 alias pow="powershell.exe"
 
 # To use Golang
-export PATH=$PATH:/usr/local/go/bin
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:/usr/local/go/bin:$GOBIN"
 
 # To use Go Modules
 export GO111MODULE=on
