@@ -3,6 +3,7 @@
 setupDir=""
 configDir="$(realpath $(dirname $0))/configurations"
 scriptsDir="$(realpath $(dirname $0))/scripts"
+user="$(whoami)"
 green='\033[0;32m'
 noColor='\033[0m'
 
@@ -86,11 +87,13 @@ setup () {
     action "Installing vim plugins"
     vim +PlugInstall +qa
 
-    
     if [[ -z $(ps -p $$ | grep zsh) ]]; then
         action "Running zsh"
         ZSH_DISABLE_COMPFIX=true exec zsh -l
     fi
+
+    action "Ensuring all home files are owned by $user"
+    chown -R "$user" find ~ -maxdepth 1 -name ".*"
 }
 
 ################## Script execution ##################
