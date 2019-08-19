@@ -87,13 +87,13 @@ setup () {
     action "Installing vim plugins"
     vim +PlugInstall +qa
 
+    action "Ensuring all home files are owned by $user"
+    chown -R "$user" find ~ -maxdepth 1 -name ".*"
+
     if [[ -z $(ps -p $$ | grep zsh) ]]; then
         action "Running zsh"
         ZSH_DISABLE_COMPFIX=true exec zsh -l
     fi
-
-    action "Ensuring all home files are owned by $user"
-    chown -R "$user" find ~ -maxdepth 1 -name ".*"
 }
 
 ################## Script execution ##################
