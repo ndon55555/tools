@@ -65,7 +65,7 @@ setup () {
 
     action "Installing python3-distutils" # Need this to get pip
     sudo apt-get install -y python3-distutils
-    
+
     action "Installing latest Pip"
     curl https://bootstrap.pypa.io/get-pip.py -o "$setupDir/get-pip.py"
     sudo python3 "$setupDir/get-pip.py"
@@ -82,13 +82,13 @@ setup () {
 
     action "Ensuring all home files are owned by $user"
     find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$user" {} 
-
-    if [[ -z "$(ps | grep -P "zsh\$")" ]]; then
-        action "Running zsh"
-        ZSH_DISABLE_COMPFIX=true exec zsh -l
-    fi
 }
 
 ################## Script execution ##################
 setup
 cleanup
+
+if [[ -z "$(ps | grep -P "zsh\$")" ]]; then
+    action "Running zsh"
+    ZSH_DISABLE_COMPFIX=true exec zsh -l
+fi
