@@ -81,9 +81,9 @@ setup () {
     vim +PlugInstall +qa
 
     action "Ensuring all home files are owned by $user"
-    find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$(whoami)" {} 
+    find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$user" {} 
 
-    if [[ -z "$(ps -p $$ | grep zsh)" ]]; then
+    if [[ -z "$(ps | grep -P "zsh\$")" ]]; then
         action "Running zsh"
         ZSH_DISABLE_COMPFIX=true exec zsh -l
     fi
