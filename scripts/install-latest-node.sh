@@ -2,7 +2,7 @@
 
 nodeVersion=$(curl https://resolve-node.now.sh/)
 
-wget "http://nodejs.org/dist/${nodeVersion}/node-${nodeVersion}-linux-x64.tar.gz" \
+wget "http://nodejs.org/dist/${nodeVersion}/node-${nodeVersion}-darwin-x64.tar.gz" \
     -O latest-node.tar.gz
 
 tar -xzf latest-node.tar.gz \
