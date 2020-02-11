@@ -63,6 +63,10 @@ setup () {
     sudo "$scriptsDir/install-latest-node.sh"
     popd
 
+    action "Installing Java 12.0.2"
+    wget -O "$setupDir/jdk.tar.gz" https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz
+    sudo tar -xzf "$setupDir/jdk.tar.gz" -C /usr/local/
+
     action "Installing python3-distutils" # Need this to get pip
     sudo apt-get install -y python3-distutils
 

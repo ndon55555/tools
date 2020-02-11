@@ -119,3 +119,7 @@ export PATH="$PATH:/usr/local/go/bin:$GOBIN"
 
 # To use Go Modules
 export GO111MODULE=on
+
+# To use Java
+export JAVA_HOME="/usr/local/jdk-12.0.2"
+export PATH="$PATH:/usr/local/jdk-12.0.2/bin"
