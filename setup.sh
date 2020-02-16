@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# Elevate to sudo and run commands as current user
+if [[ "$EUID" != 0 ]]; then
+    sudo "$0" "$@" --user="$(whoami)"
+    exit $?
+fi
+
 setupDir=""
 configDir="$(realpath $(dirname $0))/configurations"
 scriptsDir="$(realpath $(dirname $0))/scripts"
-user="$(whoami)"
 green='\033[0;32m'
 noColor='\033[0m'
 
@@ -13,7 +18,7 @@ action () {
 
 cleanup () {
     action "Removing unused packages"
-    sudo apt autoremove -f -y
+    apt autoremove -f -y
     action "Removing temporary folder for setting up tools"
     rm -rfv $setupDir
 }
@@ -23,13 +28,13 @@ setup () {
     action "Created temporary folder for setting up tools at $setupDir"
 
     action "Running apt-get update"
-    sudo apt-get -y update
+    apt-get -y update
 
     action "Installing curl, wget, python3, and vim"
-    sudo apt-get -y install curl wget python3 vim
+    apt-get -y install curl wget python3 vim
 
     action "Installing zsh and oh-my-zsh"
-    sudo apt-get -y install zsh
+    apt-get -y install zsh
     RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     action "Replacing zsh configurations"
@@ -52,27 +57,28 @@ setup () {
     popd
 
     action "Installing The Silver Searcher"
-    sudo apt-get -y install silversearcher-ag
+    apt-get -y install silversearcher-ag
 
     action "Installing Golang 1.12.9"
     wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
-    sudo tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
+    tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
 
     action "Installing latest NodeJS"
     pushd "$setupDir"
-    sudo "$scriptsDir/install-latest-node.sh"
+    "$scriptsDir/install-latest-node.sh"
     popd
 
-    action "Installing Java 12.0.2"
-    wget -O "$setupDir/jdk.tar.gz" https://download.java.net/java/GA/jdk12.0.2/e482c34c86bd4bf8b56c0b35558996b9/10/GPL/openjdk-12.0.2_linux-x64_bin.tar.gz
-    sudo tar -xzf "$setupDir/jdk.tar.gz" -C /usr/local/
+    action "Installing Java 13.0.2"
+    wget -O "$setupDir/jdk.tar.gz" https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2+8/OpenJDK13U-jdk_x64_linux_hotspot_13.0.2_8.tar.gz
+    mkdir -p /usr/local/jdk
+    tar -xzf "$setupDir/jdk.tar.gz" -C /usr/local/jdk --strip-components 1
 
     action "Installing python3-distutils" # Need this to get pip
-    sudo apt-get install -y python3-distutils
+    apt-get install -y python3-distutils
 
     action "Installing latest Pip"
     curl https://bootstrap.pypa.io/get-pip.py -o "$setupDir/get-pip.py"
-    sudo python3 "$setupDir/get-pip.py"
+    python3 "$setupDir/get-pip.py"
 
     action "Installing pynvim" # Makes deoplete plugin for vim work
     pip3 install --user pynvim
@@ -83,16 +89,8 @@ setup () {
 
     action "Installing vim plugins"
     vim +PlugInstall +qa
-
-    action "Ensuring all home files are owned by $user"
-    find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$user" {} 
 }
 
 ################## Script execution ##################
 setup
 cleanup
-
-if [[ -z "$(ps | grep -P "zsh\$")" ]]; then
-    action "Running zsh"
-    ZSH_DISABLE_COMPFIX=true exec zsh -l
-fi

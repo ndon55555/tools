@@ -121,8 +121,8 @@ export PATH="$PATH:/usr/local/go/bin:$GOBIN"
 export GO111MODULE=on
 
 # To use Java
-export JAVA_HOME="/usr/local/jdk-12.0.2"
-export PATH="$PATH:/usr/local/jdk-12.0.2/bin"
+export JAVA_HOME="/usr/local/jdk"
+export PATH="$PATH:/usr/local/jdk/bin"
 
 # Use Python3 as default Python
 alias python=python3
