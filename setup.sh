@@ -2,10 +2,11 @@
 
 # Elevate to sudo and run commands as current user
 if [[ "$EUID" != 0 ]]; then
-    sudo "$0" "$@" --user="$(whoami)"
+    sudo "$0" "$@" --user="$(whoami)" --set-home
     exit $?
 fi
 
+user="$SUDO_USER"
 setupDir=""
 configDir="$(realpath $(dirname $0))/configurations"
 scriptsDir="$(realpath $(dirname $0))/scripts"
@@ -89,6 +90,9 @@ setup () {
 
     action "Installing vim plugins"
     vim +PlugInstall +qa
+
+    action "Ensuring all home files are owned by $user"
+    find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$user:$user" {}
 }
 
 ################## Script execution ##################
