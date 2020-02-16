@@ -60,8 +60,8 @@ setup () {
     action "Installing The Silver Searcher"
     apt-get -y install silversearcher-ag
 
-    action "Installing Golang 1.12.9"
-    wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.12.9.linux-amd64.tar.gz
+    action "Installing Golang 1.13.8"
+    wget -O "$setupDir/golang.tar.gz" https://dl.google.com/go/go1.13.8.linux-amd64.tar.gz
     tar -xzf "$setupDir/golang.tar.gz" -C /usr/local/
 
     action "Installing latest NodeJS"
