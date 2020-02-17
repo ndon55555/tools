@@ -69,6 +69,10 @@ setup () {
     "$scriptsDir/install-latest-node.sh"
     popd
 
+    action "Configuring NPM"
+    mkdir "$HOME/.npm-packages"
+    npm config set prefix "$HOME/.npm-packages"
+
     action "Installing Java 13.0.2"
     wget -O "$setupDir/jdk.tar.gz" https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2+8/OpenJDK13U-jdk_x64_linux_hotspot_13.0.2_8.tar.gz
     mkdir -p /usr/local/jdk
