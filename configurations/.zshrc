@@ -127,6 +127,9 @@ export PATH="$PATH:/usr/local/jdk/bin"
 # Use Python3 as default Python
 alias python=python3
 
+# Include Python binaries in PATH
+export PATH="$PATH:$HOME/.local/bin"
+
 # Set up NPM to be used without sudo
 export PATH="$PATH:/$HOME/.npm-packages"
 export MANPATH="${MANPATH-$(manpath)}:$HOME/.npm-packages/share/man"
