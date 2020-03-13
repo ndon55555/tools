@@ -131,5 +131,5 @@ alias python=python3
 export PATH="$PATH:$HOME/.local/bin"
 
 # Set up NPM to be used without sudo
-export PATH="$PATH:/$HOME/.npm-packages"
+export PATH="$PATH:$HOME/.npm-packages/bin"
 export MANPATH="${MANPATH-$(manpath)}:$HOME/.npm-packages/share/man"
