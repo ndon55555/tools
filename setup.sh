@@ -31,8 +31,8 @@ setup () {
     action "Running apt-get update"
     apt-get -y update
 
-    action "Installing curl, wget, python3, python3-dev and vim"
-    apt-get -y install curl wget python3 python3-dev vim
+    action "Installing curl, wget, python3, and vim"
+    apt-get -y install curl wget python3 vim
 
     action "Installing zsh and oh-my-zsh"
     apt-get -y install zsh
