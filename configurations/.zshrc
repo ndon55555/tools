@@ -133,3 +133,8 @@ export PATH="$PATH:$HOME/.local/bin"
 # Set up NPM to be used without sudo
 export PATH="$PATH:$HOME/.npm-packages/bin"
 export MANPATH="${MANPATH-$(manpath)}:$HOME/.npm-packages/share/man"
+
+alias k=kubectl
+
+# For some reason, this allows for watching other aliased commands
+alias watch="watch "
