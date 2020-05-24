@@ -91,14 +91,42 @@ setup () {
     pip3 install --user pynvim
 
     action "Installing vim-plug"
-    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     action "Installing vim plugins"
     vim +PlugInstall +qa
 
     action "Ensuring all home files are owned by $user"
     find "$HOME" -maxdepth 1 -name ".*" | xargs -I {} chown -R "$user:$user" {}
+
+    if [[ ! -x "$(command -v docker)" ]]; then
+        action "docker not present. Installing docker"
+        # Ensure clean installation
+        apt-get -y remove docker docker-engine docker.io containerd runc
+        apt-get -y install apt-transport-https ca-certificates gnupg-agent software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        apt-get -y update
+        apt-get install docker-ce docker-ce-cli containerd.io
+    fi
+
+    if [[ ! -x "$(command -v k3d)" ]]; then
+        action "k3d not present. Installing k3d"
+        wget -q -O - https://raw.githubusercontent.com/rancher/k3d/master/install.sh | bash
+    fi
+
+    if [[ ! -x "$(command -v kubectl)" ]]; then
+        action "kubectl not present. Installing kubectl"
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+    fi
+
+    if [[ ! -x "$(command -v helm)" ]]; then
+        action "helm not present. Installing helm"
+        wget -O "$setupDir/helm.tar.gz" https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz
+        mkdir "$setupDir/helm-contents"
+        tar -xzf "$setupDir/helm.tar.gz" -C "$setupDir/helm-contents" --strip-components 1
+        cp -v "$setupDir/helm-contents/helm" "/usr/local/bin/helm"
+    fi
 }
 
 ################## Script execution ##################
