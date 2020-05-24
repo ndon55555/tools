@@ -42,19 +42,19 @@ setup () {
     apt-get -y install zsh
     RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-    action "Replacing zsh configurations"
-    cp -v "$configDir"/.zshrc ~/.zshrc
+    action "Symlinking zsh configurations"
+    ln -fs "$configDir"/.zshrc ~/.zshrc
 
-    action "Replacing vim configurations"
-    cp -v "$configDir"/.vimrc ~/.vimrc
-    cp -v "$configDir"/.vim/* ~/.vim/
+    action "Symlinking vim configurations"
+    ln -fs "$configDir"/.vimrc ~/.vimrc
+    ln -fs "$configDir"/.vim/* ~/.vim/
 
-    action "Replacing tmux configurations"
-    cp -v "$configDir"/.tmux.conf ~/.tmux.conf
+    action "Symlinking tmux configurations"
+    ln -fs "$configDir"/.tmux.conf ~/.tmux.conf
 
-    action "Replacing git configurations"
-    cp -v "$configDir"/.gitconfig ~/.gitconfig
-    cp -v "$configDir"/.gitignore-global ~/.gitignore-global
+    action "Symlinking git configurations"
+    ln -fs "$configDir"/.gitconfig ~/.gitconfig
+    ln -fs "$configDir"/.gitignore-global ~/.gitignore-global
     git config --global core.excludesfile ~/.gitignore-global
 
     action "Installing fuzzy finder"
