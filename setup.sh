@@ -17,10 +17,6 @@ action () {
     echo -e "${green}TOOLS SETUP:${noColor} $1..."
 }
 
-cachedInstall () {
-    tool=$1
-}
-
 cleanup () {
     action "Removing unused packages"
     apt autoremove -f -y
