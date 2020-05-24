@@ -50,6 +50,8 @@ setup () {
 
     action "Replacing git configurations"
     cp -v "$configDir"/.gitconfig ~/.gitconfig
+    cp -v "$configDir"/.gitignore-global ~/.gitignore-global
+    git config --global core.excludesfile ~/.gitignore-global
 
     action "Installing fuzzy finder"
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
