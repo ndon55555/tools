@@ -1,10 +1,10 @@
 [user]
-	name = Don Nguyen
-	email = ndon55555@gmail.com
+    name = Don Nguyen
+    email = ndon55555@gmail.com
 [alias]
     co = checkout
     ci = commit
     st = status
 [core]
     excludesfile = /home/don/.gitignore-global
-    autocrlf = true
+    autocrlf = false
