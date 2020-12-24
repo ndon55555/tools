@@ -1,5 +1,5 @@
-from lib.pack import Pack
-from lib.packs.apt import AptPackages
+from src.pack import Pack
+from src.packs.apt import AptPackages
 
 
 class Ag(Pack):

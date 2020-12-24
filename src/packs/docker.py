@@ -1,6 +1,6 @@
-from lib.pack import Pack
-from lib.packs.apt import AptPackages
-from lib.utils import print_action, sh
+from src.pack import Pack
+from src.packs.apt import AptPackages
+from src.utils import print_action, sh
 
 
 class Docker(Pack):
@@ -33,7 +33,9 @@ class Docker(Pack):
             'add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
         )
         sh("apt-get -y update")
-        AptPackages(["docker-ce", "docker-ce-cli", "docker-ce-cli", "containerd.io"]).install()
+        AptPackages(
+            ["docker-ce", "docker-ce-cli", "docker-ce-cli", "containerd.io"]
+        ).install()
 
     def configure(self, configs_dir):
         print_action("Starting docker service")

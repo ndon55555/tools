@@ -1,6 +1,6 @@
-from lib.pack import Pack
-from lib.packs.apt import AptPackages
-from lib.utils import home_dir, print_action, sh, symlink_config
+from src.pack import Pack
+from src.packs.apt import AptPackages
+from src.utils import home_dir, print_action, sh, symlink_config
 from os import path
 
 

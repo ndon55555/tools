@@ -1,7 +1,7 @@
 import requests
 import tempfile
-from lib.pack import Pack
-from lib.utils import print_action, sh
+from src.pack import Pack
+from src.utils import print_action, sh
 
 
 class Node(Pack):

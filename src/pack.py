@@ -8,7 +8,7 @@ class Pack(ABC):
         pass
 
     @abstractmethod
-    def depends_on(self) -> List['Pack']:
+    def depends_on(self) -> List["Pack"]:
         pass
 
     @abstractmethod

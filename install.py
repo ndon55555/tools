@@ -1,7 +1,7 @@
 import os.path as path
 import subprocess
-from lib.pack import Pack
-from lib.utils import sh
+from src.pack import Pack
+from src.utils import sh
 
 
 def command_available(cmd: str):
@@ -25,20 +25,20 @@ def cached_install(pack: Pack):
 
 
 def setup():
-    from lib.packs.ag import Ag
-    from lib.packs.docker import Docker
-    from lib.packs.fzf import Fzf
-    from lib.packs.git import Git
-    from lib.packs.go import Go
-    from lib.packs.helm import Helm
-    from lib.packs.java import Java
-    from lib.packs.k3d import K3d
-    from lib.packs.kubectl import Kubectl
-    from lib.packs.node import Node
-    from lib.packs.npm import Npm
-    from lib.packs.tmux import Tmux
-    from lib.packs.vim import Vim
-    from lib.packs.zsh import Zsh
+    from src.packs.ag import Ag
+    from src.packs.docker import Docker
+    from src.packs.fzf import Fzf
+    from src.packs.git import Git
+    from src.packs.go import Go
+    from src.packs.helm import Helm
+    from src.packs.java import Java
+    from src.packs.k3d import K3d
+    from src.packs.kubectl import Kubectl
+    from src.packs.node import Node
+    from src.packs.npm import Npm
+    from src.packs.tmux import Tmux
+    from src.packs.vim import Vim
+    from src.packs.zsh import Zsh
 
     packs = [
         Ag(),

@@ -65,7 +65,8 @@ export DISABLE_UPDATE_PROMPT=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z)
+plugins=(git z ssh-agent)
+zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_khoury github_ndon55555_ed25519
 
 source $ZSH/oh-my-zsh.sh
 
@@ -141,3 +142,10 @@ alias k=kubectl
 
 # For some reason, this allows for watching other aliased commands
 alias watch="watch "
+
+# Setup connection to X server to use GUI apps
+export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+export LIBGL_ALWAYS_INDIRECT=1
+
+# Use Windows browser
+export BROWSER=wslview

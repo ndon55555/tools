@@ -1,6 +1,6 @@
-from lib.pack import Pack
-from lib.packs.git import Git
-from lib.utils import home_dir, print_action, sh
+from src.pack import Pack
+from src.packs.git import Git
+from src.utils import home_dir, print_action, sh
 from os import path
 
 

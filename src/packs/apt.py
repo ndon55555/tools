@@ -1,5 +1,5 @@
-from lib.pack import Pack
-from lib.utils import print_action, sh
+from src.pack import Pack
+from src.utils import print_action, sh
 
 
 class AptPackages(Pack):
@@ -14,7 +14,7 @@ class AptPackages(Pack):
 
     def install(self):
         print_action(f"Installing apt packages: {self.packages}")
-        sh(f'apt-get -y install {" ".join(self.packages)}')
+        sh(f'apt -y install {" ".join(self.packages)}')
 
     def configure(self, configs_dir):
         print_action("Removing unused apt packages")

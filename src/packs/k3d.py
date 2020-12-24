@@ -1,6 +1,6 @@
-from lib.pack import Pack
-from lib.packs.docker import Docker
-from lib.utils import print_action, sh
+from src.pack import Pack
+from src.packs.docker import Docker
+from src.utils import print_action, sh
 
 
 class K3d(Pack):
