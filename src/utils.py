@@ -41,7 +41,7 @@ def symlink_config(src_dir: str, dst_dir: str, config: str):
     dst_dir = path.join(dst_dir, path.dirname(config))
     sh(f"mkdir -p {dst_dir}")
     sh(
-        "ln -fs {src} {dst}".format(
+        "ln -fns {src} {dst}".format(
             src=path.join(src_dir, config),
             dst=path.join(dst_dir, path.basename(config)),
         )

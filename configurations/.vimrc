@@ -63,3 +63,9 @@ let g:coc_disable_startup_warning = 1
 
 " Make gitgutter column clear
 highlight clear SignColumn
+
+" Deoplete wants this
+set encoding=utf-8
+
+" Make sure deoplete.nvim uses system python so deoplete doesn't break in virtual environments.
+let g:python3_host_prog="/usr/bin/python3"

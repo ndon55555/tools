@@ -6,5 +6,4 @@
     ci = commit
     st = status
 [core]
-    excludesfile = /home/don/.gitignore-global
     autocrlf = false

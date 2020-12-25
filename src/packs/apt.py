@@ -14,7 +14,10 @@ class AptPackages(Pack):
 
     def install(self):
         print_action(f"Installing apt packages: {self.packages}")
-        sh(f'apt -y install {" ".join(self.packages)}')
+        sh(
+            f'apt -y install {" ".join(self.packages)}',
+            {"DEBIAN_FRONTEND": "noninteractive"},
+        )
 
     def configure(self, configs_dir):
         print_action("Removing unused apt packages")

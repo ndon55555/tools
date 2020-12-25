@@ -18,9 +18,6 @@ class Git(Pack):
         print_action("Symlinking git configurations")
         symlink_config(configs_dir, home_dir, ".gitconfig")
         symlink_config(configs_dir, home_dir, ".gitignore-global")
-        print_action("Setting global gitignore file")
-        sh(
-            "git config --global core.excludesfile {}".format(
-                path.join(home_dir, ".gitignore-global")
-            )
-        )
+        default_global_git_ignore_file = f"{home_dir}/.config/git/ignore"
+        sh(f"mkdir -p $(dirname {default_global_git_ignore_file})")
+        sh(f"ln -fns {home_dir}/.gitignore-global {default_global_git_ignore_file}")

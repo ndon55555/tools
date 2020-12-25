@@ -16,20 +16,20 @@ action () {
 }
 
 setup () {
-    action "Running apt-get update"
-    apt-get -y update
+    action "Running apt update"
+    apt -y update
 
     action "Installing sudo"
-    apt-get -y install sudo
+    apt -y install sudo
 
     action "Installing curl and wget"
-    apt-get -y install curl wget
+    apt -y install curl wget
 
     action "Installing python3"
-    apt-get -y install python3
+    apt -y install python3
 
     action "Installing pip3"
-    apt-get -y install python3-venv python3-pip
+    apt -y install python3-venv python3-pip
     pip3 install --upgrade pip
     pip3 install --upgrade keyrings.alt # Somehow resolves a problem seen after upgrading pip
 

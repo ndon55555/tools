@@ -13,8 +13,8 @@ class Zsh(Pack):
     def install(self):
         print_action("Installing oh-my-zsh")
         sh(
-            env={"RUNZSH": "no"},
-            cmd='sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true',
+            'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true',
+            {"CHSH": "no", "RUNZSH": "no"},
         )
 
     def configure(self, configs_dir):
