@@ -20,7 +20,9 @@ class Vim(Pack):
         symlink_config(configs_dir, home_dir, path.join(".vim", "coc-settings.json"))
 
         print_action("Installing pynvim")  # Makes deoplete plugin for vim work
-        sh("/usr/local/bin/pip3 install --user pynvim")  # Make sure to use system pip3, not the one in the virtual environment
+        sh(
+            "/usr/local/bin/pip3 install --user pynvim"
+        )  # Make sure to use system pip3, not the one in the virtual environment
 
         print_action("Installing vim-plug")
         vim_plug_file = path.join(home_dir, ".vim", "autoload", "plug.vim")
