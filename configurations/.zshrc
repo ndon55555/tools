@@ -135,7 +135,7 @@ alias python=python3
 export PATH="$PATH:$HOME/.local/bin"
 
 # Set up NPM to be used without sudo
-export PATH="$PATH:$HOME/.npm-packages/bin"
+export PATH="$PATH:$(npm bin -g)"
 export MANPATH="${MANPATH-$(manpath)}:$HOME/.npm-packages/share/man"
 
 alias k=kubectl
@@ -149,3 +149,5 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 # Use Windows browser
 export BROWSER=wslview
+
+export PULSE_SERVER="tcp:$(grep nameserver /etc/resolv.conf | sed 's/nameserver //')"

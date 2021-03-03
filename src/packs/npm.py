@@ -15,7 +15,4 @@ class Npm(Pack):
         pass
 
     def configure(self, configs_dir):
-        print_action("Configuring NPM")
-        npm_packages_dir = path.join(home_dir, ".npm-packages")
-        sh(f"mkdir -p {npm_packages_dir}")
-        sh(f"npm config set prefix {npm_packages_dir}")
+        # no-op

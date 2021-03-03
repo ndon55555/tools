@@ -6,4 +6,5 @@
     ci = commit
     st = status
 [core]
-    autocrlf = false
+    autocrlf = input
+    eol = lf
