@@ -15,4 +15,4 @@ class Npm(Pack):
         pass
 
     def configure(self, configs_dir):
-        # no-op
+        pass

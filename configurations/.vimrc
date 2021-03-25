@@ -10,11 +10,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Sidebar file navigation in vim
 Plug 'preservim/nerdtree'
 
-" Code completion in vim
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-
 " Completion framework and language server client
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
@@ -55,17 +50,10 @@ let g:go_fmt_command="goimports"
 " Show hidden files in NERDTRee
 let NERDTreeShowHidden=1
 
-" Deoplete config
-let g:deoplete#enable_at_startup=1
-
 " Ignore coc warnings
 let g:coc_disable_startup_warning = 1
 
 " Make gitgutter column clear
 highlight clear SignColumn
 
-" Deoplete wants this
 set encoding=utf-8
-
-" Make sure deoplete.nvim uses system python so deoplete doesn't break in virtual environments.
-let g:python3_host_prog="/usr/bin/python3"
