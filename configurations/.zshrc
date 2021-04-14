@@ -27,7 +27,10 @@ ZSH_THEME="af-magic"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to always accept automatic upgrades.
+export DISABLE_UPDATE_PROMPT=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -62,7 +65,8 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z)
+plugins=(git z ssh-agent asdf)
+zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_khoury github_ndon55555_ed25519
 
 source $ZSH/oh-my-zsh.sh
 
@@ -131,10 +135,19 @@ alias python=python3
 export PATH="$PATH:$HOME/.local/bin"
 
 # Set up NPM to be used without sudo
-export PATH="$PATH:$HOME/.npm-packages/bin"
+export PATH="$PATH:$(npm bin -g)"
 export MANPATH="${MANPATH-$(manpath)}:$HOME/.npm-packages/share/man"
 
 alias k=kubectl
 
 # For some reason, this allows for watching other aliased commands
 alias watch="watch "
+
+# Setup connection to X server to use GUI apps
+export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+export LIBGL_ALWAYS_INDIRECT=1
+
+# Use Windows browser
+export BROWSER=wslview
+
+export PULSE_SERVER="tcp:$(grep nameserver /etc/resolv.conf | sed 's/nameserver //')"
