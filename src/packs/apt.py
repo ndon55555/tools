@@ -1,5 +1,5 @@
 from src.pack import Pack
-from src.utils import print_action, sh
+from src.utils import print_action, bash
 
 
 class AptPackages(Pack):
@@ -14,11 +14,11 @@ class AptPackages(Pack):
 
     def install(self):
         print_action(f"Installing apt packages: {self.packages}")
-        sh(
+        bash(
             f'apt -y install {" ".join(self.packages)}',
             {"DEBIAN_FRONTEND": "noninteractive"},
         )
 
     def configure(self, configs_dir):
         print_action("Removing unused apt packages")
-        sh("apt autoremove -f -y")
+        bash("apt autoremove -f -y")

@@ -1,9 +1,12 @@
-import tempfile
 from src.pack import Pack
-from src.utils import print_action, sh
+from src.packs.asdf import Asdf
+from src.utils import print_action
 
 
 class Java(Pack):
+    def __init__(self):
+        self._asdf = Asdf()
+
     def command_name(self):
         return "java"
 
@@ -11,14 +14,15 @@ class Java(Pack):
         return []
 
     def install(self):
-        print_action("Installing Java 13.0.2")
+        print_action("Installing Java")
 
-        with tempfile.NamedTemporaryFile() as java_tar_file:
-            sh(
-                f"wget -O {java_tar_file.name} https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2+8/OpenJDK13U-jdk_x64_linux_hotspot_13.0.2_8.tar.gz"
-            )
-            sh("mkdir -p /usr/local/jdk")
-            sh(f"tar -xzf {java_tar_file.name} -C /usr/local/jdk --strip-components 1")
+        self._asdf.bash_with_asdf_available(
+            "asdf plugin-add java https://github.com/halcyon/asdf-java.git || true"
+        )
+        self._asdf.bash_with_asdf_available("asdf install java latest:adoptopenjdk-11")
+        self._asdf.bash_with_asdf_available(
+            f"asdf global java {self._asdf.latest_installed_version('java adoptopenjdk-11')}"
+        )
 
     def configure(self, configs_dir):
         pass

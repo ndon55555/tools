@@ -1,22 +1,30 @@
-from src.pack import Pack
-from src.packs.git import Git
-from src.utils import home_dir, print_action, sh
 from os import path
+
+from src.pack import Pack
+from src.packs.asdf import Asdf
+from src.utils import print_action
 
 
 class Fzf(Pack):
+    def __init__(self):
+        self._asdf = Asdf()
+
     def command_name(self):
         return "fzf"
 
     def depends_on(self):
-        return [Git()]
+        return [self._asdf]
 
     def install(self):
         print_action("Installing fuzzy finder")
-        # The repo is downloaded to HOME because it contains binaries that make the tool work
-        fzf_dir = path.join(home_dir, ".fzf")
-        sh(f"git clone --depth 1 https://github.com/junegunn/fzf.git {fzf_dir} || true")
-        sh(f"{fzf_dir}/install --all")
+        self._asdf.bash_with_asdf_available(
+            "asdf plugin add fzf https://github.com/kompiro/asdf-fzf.git || true"
+        )
+        self._asdf.bash_with_asdf_available("asdf install fzf latest")
+        self._asdf.bash_with_asdf_available(
+            f"asdf global fzf {self._asdf.latest_installed_version('fzf')}"
+        )
+        self._asdf.bash_with_asdf_available("$(asdf where fzf)/install --all")
 
     def configure(self, configs_dir):
         pass

@@ -1,10 +1,12 @@
-import tempfile
 from src.pack import Pack
-from src.utils import print_action, sh
-from os import path
+from src.packs.asdf import Asdf
+from src.utils import print_action
 
 
 class Helm(Pack):
+    def __init__(self):
+        self._asdf = Asdf()
+
     def command_name(self):
         return "helm"
 
@@ -13,19 +15,13 @@ class Helm(Pack):
 
     def install(self):
         print_action("Installing helm")
-
-        with tempfile.NamedTemporaryFile() as helm_tar_file:
-            sh(
-                f"wget -O {helm_tar_file.name} https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz"
-            )
-
-            with tempfile.TemporaryDirectory() as untarred_helm_dir:
-                sh(
-                    f"tar -xzf {helm_tar_file.name} -C {untarred_helm_dir} --strip-components 1"
-                )
-                sh(
-                    f'cp -v {path.join(untarred_helm_dir, "helm")} "/usr/local/bin/helm"'
-                )
+        self._asdf.bash_with_asdf_available(
+            "asdf plugin-add helm https://github.com/Antiarchitect/asdf-helm.git || true"
+        )
+        self._asdf.bash_with_asdf_available("asdf install helm latest")
+        self._asdf.bash_with_asdf_available(
+            f"asdf global helm {self._asdf.latest_installed_version('helm')}"
+        )
 
     def configure(self, configs_dir):
         pass

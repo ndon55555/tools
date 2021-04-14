@@ -65,7 +65,7 @@ export DISABLE_UPDATE_PROMPT=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z ssh-agent)
+plugins=(git z ssh-agent asdf)
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_khoury github_ndon55555_ed25519
 
 source $ZSH/oh-my-zsh.sh

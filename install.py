@@ -1,12 +1,12 @@
 import os.path as path
 import subprocess
 from src.pack import Pack
-from src.utils import sh
+from src.utils import bash
 
 
 def command_available(cmd: str):
     try:
-        sh(f"command -v {cmd}", suppress_output=True)
+        bash(f"command -v {cmd}", suppress_output=True)
         return True
     except subprocess.CalledProcessError:
         return False
@@ -20,12 +20,14 @@ def cached_install(pack: Pack):
             cached_install(dep)
 
         pack.install()
-
-    pack.configure(path.join(path.dirname(path.abspath(__file__)), "configurations"))
+        pack.configure(
+            path.join(path.dirname(path.abspath(__file__)), "configurations")
+        )
 
 
 def setup():
     from src.packs.ag import Ag
+    from src.packs.asdf import Asdf
     from src.packs.docker import Docker
     from src.packs.fzf import Fzf
     from src.packs.git import Git
@@ -42,6 +44,7 @@ def setup():
 
     packs = [
         Ag(),
+        Asdf(),
         Docker(),
         Fzf(),
         Git(),

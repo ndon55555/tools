@@ -1,10 +1,12 @@
-import requests
-import tempfile
 from src.pack import Pack
-from src.utils import print_action, sh
+from src.packs.asdf import Asdf
+from src.utils import print_action
 
 
 class Node(Pack):
+    def __init__(self):
+        self._asdf = Asdf()
+
     def command_name(self):
         return "node"
 
@@ -12,18 +14,12 @@ class Node(Pack):
         return []
 
     def install(self):
-        print_action("Installing latest NodeJS")
-        latest_node_version = requests.get(
-            "https://resolve-node.now.sh"
-        ).content.decode()
-
-        with tempfile.NamedTemporaryFile() as node_tar_file:
-            sh(
-                f"wget -O {node_tar_file.name} https://nodejs.org/dist/{latest_node_version}/node-{latest_node_version}-linux-x64.tar.gz"
-            )
-            sh(
-                f"tar -xzf {node_tar_file.name} --exclude CHANGELOG.md --exclude LICENSE --exclude README.md --strip-components 1 -C /usr/local"
-            )
+        print_action("Installing NodeJS")
+        self._asdf.bash_with_asdf_available("asdf plugin-add nodejs || true")
+        self._asdf.bash_with_asdf_available("asdf install nodejs latest")
+        self._asdf.bash_with_asdf_available(
+            f"asdf global nodejs {self._asdf.latest_installed_version('nodejs')}"
+        )
 
     def configure(self, configs_dir):
         pass

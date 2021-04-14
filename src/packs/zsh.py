@@ -1,6 +1,6 @@
 from src.pack import Pack
 from src.packs.apt import AptPackages
-from src.utils import home_dir, print_action, sh, symlink_config
+from src.utils import home_dir, print_action, bash, symlink_config
 
 
 class Zsh(Pack):
@@ -12,7 +12,7 @@ class Zsh(Pack):
 
     def install(self):
         print_action("Installing oh-my-zsh")
-        sh(
+        bash(
             'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true',
             {"CHSH": "no", "RUNZSH": "no"},
         )

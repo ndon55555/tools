@@ -1,6 +1,6 @@
 from src.pack import Pack
 from src.packs.apt import AptPackages
-from src.utils import home_dir, print_action, sh, symlink_config
+from src.utils import home_dir, print_action, bash, symlink_config
 from os import path
 
 
@@ -19,5 +19,5 @@ class Git(Pack):
         symlink_config(configs_dir, home_dir, ".gitconfig")
         symlink_config(configs_dir, home_dir, ".gitignore-global")
         default_global_git_ignore_file = f"{home_dir}/.config/git/ignore"
-        sh(f"mkdir -p $(dirname {default_global_git_ignore_file})")
-        sh(f"ln -fns {home_dir}/.gitignore-global {default_global_git_ignore_file}")
+        bash(f"mkdir -p $(dirname {default_global_git_ignore_file})")
+        bash(f"ln -fns {home_dir}/.gitignore-global {default_global_git_ignore_file}")
