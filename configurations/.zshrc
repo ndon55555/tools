@@ -8,7 +8,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="af-magic"
+export TYPEWRITTEN_SYMBOL="Δ »"
+export TYPEWRITTEN_CURSOR="beam"
+export TYPEWRITTEN_RELATIVE_PATH="adaptive"
+export TYPEWRITTEN_RIGHT_PROMPT_PREFIX="# "
+export TYPEWRITTEN_COLOR_MAPPINGS="secondary:cyan;accent:yellow"
+export TYPEWRITTEN_COLORS="prompt:white;git_branch:green;git_status_diverged:#e96900;git_status_ahead:#e96900;git_status_behind:#e96900;git_status_new:#8dfd02;current_directory:#1ba0e4;arrow:#586da7"
+ZSH_THEME="typewritten"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load

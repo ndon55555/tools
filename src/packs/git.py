@@ -1,7 +1,6 @@
 from src.pack import Pack
 from src.packs.apt import AptPackages
-from src.utils import home_dir, print_action, bash, symlink_config
-from os import path
+from src.utils import bash, home_dir, print_action, symlink_config
 
 
 class Git(Pack):

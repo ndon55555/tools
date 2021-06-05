@@ -1,7 +1,8 @@
 import subprocess
-from colorama import Fore
 from os import environ, path
 from typing import Dict, Optional
+
+from colorama import Fore
 
 home_dir = path.expanduser("~")
 
@@ -47,11 +48,9 @@ def symlink_config(src_dir: str, dst_dir: str, config: str):
     if path.isabs(config):
         raise ValueError("config path must be relative to src_dir")
 
-    dst_dir = path.join(dst_dir, path.dirname(config))
-    bash(f"mkdir -p {dst_dir}")
-    bash(
-        "ln -fns {src} {dst}".format(
-            src=path.join(src_dir, config),
-            dst=path.join(dst_dir, path.basename(config)),
-        )
-    )
+    symlink(path.join(src_dir, config), path.join(dst_dir, config))
+
+
+def symlink(src: str, dst: str):
+    bash(f"mkdir -p {path.dirname(dst)}")
+    bash(f"ln -fns {src} {dst}")
